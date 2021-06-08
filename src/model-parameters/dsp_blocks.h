@@ -31,7 +31,9 @@ ei_model_dsp_t ei_dsp_blocks[ei_dsp_blocks_size] = {
     { // DSP block 3
         650,
         &extract_mfcc_features,
-        (void*)&ei_dsp_config_3
+        (void*)&ei_dsp_config_3,
+        ei_dsp_config_3_axes,
+        ei_dsp_config_3_axes_size
     }
 };
 

@@ -41,10 +41,10 @@
 #define EI_CLASSIFIER_DATATYPE_FLOAT32           1
 #define EI_CLASSIFIER_DATATYPE_INT8              9
 
-#define EI_CLASSIFIER_PROJECT_ID                 28103
+#define EI_CLASSIFIER_PROJECT_ID                 34734
 #define EI_CLASSIFIER_PROJECT_OWNER              "Francis Chemorion"
-#define EI_CLASSIFIER_PROJECT_NAME               "MBEDSpeech"
-#define EI_CLASSIFIER_PROJECT_DEPLOY_VERSION     8
+#define EI_CLASSIFIER_PROJECT_NAME               "EMBEDSpeech"
+#define EI_CLASSIFIER_PROJECT_DEPLOY_VERSION     1
 #define EI_CLASSIFIER_NN_INPUT_FRAME_SIZE        650
 #define EI_CLASSIFIER_RAW_SAMPLE_COUNT           16000
 #define EI_CLASSIFIER_RAW_SAMPLES_PER_FRAME      1
@@ -52,7 +52,7 @@
 #define EI_CLASSIFIER_INPUT_WIDTH                0
 #define EI_CLASSIFIER_INPUT_HEIGHT               0
 #define EI_CLASSIFIER_INTERVAL_MS                0.0625
-#define EI_CLASSIFIER_LABEL_COUNT                6
+#define EI_CLASSIFIER_LABEL_COUNT                12
 #define EI_CLASSIFIER_HAS_ANOMALY                0
 #define EI_CLASSIFIER_FREQUENCY                  16000
 #define EI_CLASSIFIER_USE_QUANTIZED_DSP_BLOCK    0
@@ -61,11 +61,11 @@
 #define EI_CLASSIFIER_OBJECT_DETECTION           0
 
 
-#define EI_CLASSIFIER_TFLITE_ARENA_SIZE          10355
+#define EI_CLASSIFIER_TFLITE_ARENA_SIZE          8569
 #define EI_CLASSIFIER_TFLITE_INPUT_DATATYPE      EI_CLASSIFIER_DATATYPE_INT8
 #define EI_CLASSIFIER_TFLITE_INPUT_QUANTIZED     1
-#define EI_CLASSIFIER_TFLITE_INPUT_SCALE         0.04866392910480499
-#define EI_CLASSIFIER_TFLITE_INPUT_ZEROPOINT     -5
+#define EI_CLASSIFIER_TFLITE_INPUT_SCALE         0.0494852289557457
+#define EI_CLASSIFIER_TFLITE_INPUT_ZEROPOINT     -3
 #define EI_CLASSIFIER_TFLITE_OUTPUT_DATATYPE     EI_CLASSIFIER_DATATYPE_INT8
 #define EI_CLASSIFIER_TFLITE_OUTPUT_QUANTIZED    1
 #define EI_CLASSIFIER_TFLITE_OUTPUT_SCALE        0.00390625
@@ -75,10 +75,10 @@
 #define EI_CLASSIFIER_HAS_TFLITE_OPS_RESOLVER    1
 
 #define EI_CLASSIFIER_SENSOR                     EI_CLASSIFIER_SENSOR_MICROPHONE
-#define EI_CLASSIFIER_SLICE_SIZE                 (EI_CLASSIFIER_RAW_SAMPLE_COUNT / EI_CLASSIFIER_SLICES_PER_MODEL_WINDOW)
 #ifndef EI_CLASSIFIER_SLICES_PER_MODEL_WINDOW
 #define EI_CLASSIFIER_SLICES_PER_MODEL_WINDOW    4
 #endif // EI_CLASSIFIER_SLICES_PER_MODEL_WINDOW
+#define EI_CLASSIFIER_SLICE_SIZE                 (EI_CLASSIFIER_RAW_SAMPLE_COUNT / EI_CLASSIFIER_SLICES_PER_MODEL_WINDOW)
 
 #if EI_CLASSIFIER_INFERENCING_ENGINE == EI_CLASSIFIER_TFLITE && EI_CLASSIFIER_USE_FULL_TFLITE == 1
 #undef EI_CLASSIFIER_INFERENCING_ENGINE
@@ -90,7 +90,7 @@
 #endif
 #endif // EI_CLASSIFIER_INFERENCING_ENGINE == EI_CLASSIFIER_TFLITE && EI_CLASSIFIER_USE_FULL_TFLITE == 1
 
-const char* ei_classifier_inferencing_categories[] = { "down", "happy", "noise", "right", "stop", "unknown" };
+const char* ei_classifier_inferencing_categories[] = { "down", "go", "left", "no", "noise", "off", "on", "right", "stop", "unknown", "up", "yes" };
 
 typedef struct {
     uint16_t implementation_version;
@@ -176,8 +176,11 @@ typedef struct {
     int low_frequency;
     int high_frequency;
     float pre_cof;
+    bool invert_features;
 } ei_dsp_config_audio_syntiant_t;
 
+uint8_t ei_dsp_config_3_axes[] = { 0 };
+const uint32_t ei_dsp_config_3_axes_size = 1;
 ei_dsp_config_mfcc_t ei_dsp_config_3 = {
     2,
     1,

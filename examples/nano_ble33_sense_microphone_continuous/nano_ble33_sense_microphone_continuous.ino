@@ -1,24 +1,7 @@
-/* Edge Impulse Arduino examples
- * Copyright (c) 2021 EdgeImpulse Inc.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
+/*
+Author: Francis Kiptengwer Chemorion
+Email: kchemorion@gmail.com
+*/
 
 // If your target is limited in memory remove this macro to save 10K RAM
 #define EIDSP_QUANTIZE_FILTERBANK   0
@@ -26,13 +9,12 @@
 /**
  * Define the number of slices per model window. E.g. a model window of 1000 ms
  * with slices per model window set to 4. Results in a slice size of 250 ms.
- * For more info: https://docs.edgeimpulse.com/docs/continuous-audio-sampling
  */
 #define EI_CLASSIFIER_SLICES_PER_MODEL_WINDOW 3
 
 /* Includes ---------------------------------------------------------------- */
 #include <PDM.h>
-#include <mbedspeech_inference.h>
+#include <EMBEDSpeech_inferencing.h>
 
 /** Audio buffers, pointers and selectors */
 typedef struct {
@@ -57,7 +39,7 @@ void setup()
     // put your setup code here, to run once:
     Serial.begin(115200);
 
-    Serial.println("Edge Impulse Inferencing Demo");
+    Serial.println("EMBEDSpeech Inferencing Demo");
 
     // summary of inferencing settings (from model_metadata.h)
     ei_printf("Inferencing settings:\n");
